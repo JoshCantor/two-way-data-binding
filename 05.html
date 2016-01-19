@@ -8,6 +8,51 @@
       // start with the code from 04.html
       // using setInterval, make it so that if you change window.pizzaSize in Chrome dev tools
       // the pizzaSize inputs and labels will change with it
+      document.addEventListener('DOMContentLoaded', function() {
+              var dataBindList = document.querySelectorAll('[data-bind]');
+              
+              setInterval(function(){
+                console.log('foo');
+                for (var i = 0; i < dataBindList.length; i++) {
+                  var currentEl = dataBindList[i];        
+                  
+                  if (currentEl.tagName === 'INPUT') {
+                    
+                    if (window.pizzaSize) {
+                        var spanEls = document.getElementsByTagName('span');
+                        
+                        for (var j = 0; j < spanEls.length; j++) {
+                          var spanEl = spanEls[j];
+                          if (spanEl.getAttribute('data-bind') === 'pizzaSize') {
+                            spanEl.innerHTML = window.pizzaSize;
+                            if (currentEl.getAttribute('data-bind') === 'pizzaSize') {
+                              currentEl.value = window.pizzaSize;
+                            }
+                          } 
+                        }
+
+                    } else {
+                      currentEl.addEventListener('keyup', function(event) {
+                        var binding = event.target.getAttribute('data-bind');
+                        window[binding] = event.target.value;
+                        var spanEls = document.getElementsByTagName('span');
+                        
+                        for (var k = 0; k < spanEls.length; k++) {
+                          var spanEl = spanEls[k];
+                          if (spanEl.getAttribute('data-bind') === event.target.getAttribute('data-bind')) {
+                            spanEl.innerHTML = window[binding];
+                          } 
+                        }
+                      });
+                    }
+                  }
+
+                }
+
+              }, 500);  
+            });
+
+  function 
     </script>
   </head>
   <body>

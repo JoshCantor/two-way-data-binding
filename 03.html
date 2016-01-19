@@ -20,6 +20,24 @@
       // check your correctness by logging the property, such as window.fooBar, in Chrome dev tools
 
       // NOTE: there's nothing special about the words "data-bind" - it could be "data-kitten" and would still work
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var dataBindList = document.querySelectorAll('[data-bind]');
+        
+        for (var i = 0; i < dataBindList.length; i++) {
+          
+          var currentEl = dataBindList[i];        
+          if (currentEl.tagName === 'INPUT') {
+            currentEl.addEventListener('keyup', function(event) {
+              var binding = event.target.getAttribute('data-bind');
+              window[binding] = event.target.value;
+              console.log(window[binding]);
+            });
+          }
+
+        }   
+      });
+
     </script>
   </head>
   <body>

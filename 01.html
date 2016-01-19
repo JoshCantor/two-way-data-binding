@@ -14,13 +14,22 @@
       // every time a user types into the field, set window.pizzaSize to the value of the input
       // this binds window.pizzaSize to the value of the input
 
+
       // Challenge #3
       // when a user types into the input, update the display-size span
       // with the value of window.pizzaSize
       // this binds span to the value of the input
       document.addEventListener('DOMContentLoaded', function () {
-        console.log(document.querySelector('#pizza-size'))
-      })
+        var pizzaInput = document.querySelector('#pizza-size');
+        
+        document.addEventListener('keyup', function() {
+            var pizzaValue = pizzaInput.value;
+            window.pizzaSize = pizzaValue;
+            var display = document.querySelector('#display-size');
+            display.innerHTML = window.pizzaSize; 
+        });
+
+      });
 
     </script>
   </head>
